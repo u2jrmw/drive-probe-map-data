@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "region": "us-ia",
+  "last_successful_check_utc": "2026-11-10T21:47:17.765532+00:00",
+  "source_data_utc": "2026-11-08T21:21:00Z",
+  "last_check": {
+    "checked_utc": "2026-11-10T21:47:17.765532+00:00",
+    "source_data_utc": "2026-11-08T21:21:00Z",
+    "changed": [
+      "roads_-91_42.sqlite",
+      "roads_-93_41.sqlite",
+      "roads_-94_41.sqlite",
+      "roads_-94_42.sqlite",
+      "roads_-96_41.sqlite"
+    ],
+    "reused": [
+      "roads_-91_40.sqlite",
+      "roads_-91_41.sqlite",
+      "roads_-92_40.sqlite",
+      "roads_-92_41.sqlite",
+      "roads_-92_42.sqlite",
+      "roads_-92_43.sqlite",
+      "roads_-93_40.sqlite",
+      "roads_-93_42.sqlite",
+      "roads_-93_43.sqlite",
+      "roads_-94_40.sqlite",
+      "roads_-94_43.sqlite",
+      "roads_-95_40.sqlite",
+      "roads_-95_41.sqlite",
+      "roads_-95_42.sqlite",
+      "roads_-95_43.sqlite",
+      "roads_-96_40.sqlite",
+      "roads_-96_42.sqlite",
+      "roads_-96_43.sqlite",
+      "roads_-97_41.sqlite",
+      "roads_-97_42.sqlite",
+      "roads_-97_43.sqlite"
+    ],
+    "removed": [],
+    "full_bytes": 200695839,
+    "upload_bytes": 74477599,
+    "duration_seconds": 193.8,
+    "no_changes": false,
+    "published": false,
+    "version": "2026-11-08-61464a4c5f-f1-20261110214717",
+    "dry_run": true
+  }
+}
