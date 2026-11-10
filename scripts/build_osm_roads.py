@@ -3,6 +3,7 @@ Usage: python build_osm_roads.py INPUT.osm.pbf OUTPUT_DIRECTORY REGION SOURCE_UR
 Database output is an ODbL derivative of OpenStreetMap, separate from app code.
 """
 import datetime,json,math,pathlib,re,sqlite3,sys,hashlib
+from grid_content import CONTENT_FORMAT, fingerprint_grid
 
 def explicit_limit(tags):
     # Conditional, directional, lane and other extended rules require a richer evaluator.
@@ -40,7 +41,7 @@ def build(source,output,region,url):
     reader=osmium.io.Reader(str(source));header=reader.header();data_time=header.get('osmosis_replication_timestamp');reader.close()
     Handler().apply_file(str(source),locations=True,idx='flex_mem')
     for db in dbs.values():db.commit();assert db.execute('pragma quick_check').fetchone()[0]=='ok';db.execute('VACUUM');db.close()
-    manifest={'schema':2,'region':region,'source':'OpenStreetMap','source_url':url,'data_timestamp':data_time,'retrieved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_sha256':hashlib.file_digest(open(source,'rb'),'sha256').hexdigest() if hasattr(hashlib,'file_digest') else hashlib.sha256(pathlib.Path(source).read_bytes()).hexdigest(),'license':'ODbL 1.0','attribution':'© OpenStreetMap contributors','license_url':'https://opendatacommons.org/licenses/odbl/1-0/','counts':counts,'shards':[{'file':f'roads_{k}.sqlite','bounds':boxes[k],'records':stats[k][0],'known_limits':stats[k][1]} for k in sorted(dbs)]}
+    manifest={'schema':2,'region':region,'source':'OpenStreetMap','source_url':url,'data_timestamp':data_time,'retrieved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_sha256':hashlib.file_digest(open(source,'rb'),'sha256').hexdigest() if hasattr(hashlib,'file_digest') else hashlib.sha256(pathlib.Path(source).read_bytes()).hexdigest(),'license':'ODbL 1.0','attribution':'© OpenStreetMap contributors','license_url':'https://opendatacommons.org/licenses/odbl/1-0/','counts':counts,'shards':[{'file':f'roads_{k}.sqlite','bounds':boxes[k],'records':stats[k][0],'known_limits':stats[k][1],'content_format':CONTENT_FORMAT,'content_sha256':fingerprint_grid(output/f'roads_{k}.sqlite')} for k in sorted(dbs)]}
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2))
     (output/'LICENSE.txt').write_text('© OpenStreetMap contributors\nThis adapted database is available under the Open Database License (ODbL) 1.0.\nhttps://opendatacommons.org/licenses/odbl/1-0/\nhttps://www.openstreetmap.org/copyright\nSource extract: '+url+'\nModifications: filtered motor roads, selected tags, coordinate rounding and indexed SQLite conversion.\n')
     print(json.dumps(counts));print('Pack bytes:',sum(p.stat().st_size for p in output.iterdir()))

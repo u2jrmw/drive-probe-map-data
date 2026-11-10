@@ -1,0 +1,139 @@
+name: Check and publish offline maps
+
+on:
+  schedule:
+    - cron: '23 7 * * *'
+  workflow_dispatch:
+    inputs:
+      region:
+        description: Region to check
+        type: choice
+        required: true
+        default: us-ia
+        options:
+          - us-ia
+      dry_run:
+        description: Check and build without publishing
+        type: boolean
+        required: true
+        default: true
+      allow_count_anomaly:
+        description: Allow an explained road or speed-limit count drop
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: map-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event_name != 'schedule' || vars.MAP_PUBLICATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out triggering branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned map build dependencies
+        run: python -m pip install -r requirements-build.txt
+
+      - name: Run the full Python test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Check and publish Iowa map data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAP_PUBLICATION_ENABLED: ${{ vars.MAP_PUBLICATION_ENABLED }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_REGION: ${{ inputs.region || 'us-ia' }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          INPUT_ALLOW_COUNT_ANOMALY: ${{ inputs.allow_count_anomaly }}
+          RUN_SUMMARY: publication-result.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--region "$INPUT_REGION" --summary "$RUN_SUMMARY")
+          publish=false
+          if [[ "$EVENT_NAME" == "schedule" ]]; then
+            [[ "$MAP_PUBLICATION_ENABLED" == "true" ]] && publish=true
+          elif [[ "$MAP_PUBLICATION_ENABLED" == "true" && "$INPUT_DRY_RUN" == "false" ]]; then
+            publish=true
+          fi
+          if [[ "$publish" == "true" ]]; then
+            args+=(--publish)
+          else
+            args+=(--dry-run)
+          fi
+          if [[ "$INPUT_ALLOW_COUNT_ANOMALY" == "true" ]]; then
+            args+=(--allow-count-anomaly)
+          fi
+          /usr/bin/time -v -o resource-usage.txt python scripts/publish_maps.py "${args[@]}"
+          cat resource-usage.txt
+
+      - name: Add run details to summary
+        run: |
+          {
+            echo '### Map publication check'
+            echo
+            cat publication-result.json
+            echo
+            echo '### Runner resource usage'
+            echo '```text'
+            cat resource-usage.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit successful check status
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          MAP_PUBLICATION_ENABLED: ${{ vars.MAP_PUBLICATION_ENABLED }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "$BRANCH_NAME"
+          git reset --hard "origin/$BRANCH_NAME"
+          # Update status only after the publisher has completed successfully.
+          python - <<'PY'
+          import json, os, pathlib
+          report = json.loads(pathlib.Path('publication-result.json').read_text())
+          path = pathlib.Path('publication-status.json')
+          status = json.loads(path.read_text()) if path.exists() else {'schema': 1, 'region': 'us-ia'}
+          previous_check = status.get('last_successful_check_utc')
+          if previous_check and previous_check > report['checked_utc']:
+              raise SystemExit('A newer successful check is already recorded; refusing to move status backward')
+          status['last_successful_check_utc'] = report['checked_utc']
+          status['source_data_utc'] = report['source_data_utc']
+          status['last_check'] = {
+              'checked_utc': report['checked_utc'], 'source_data_utc': report['source_data_utc'],
+              'changed': report['changed'], 'reused': report['reused'], 'removed': report['removed'],
+              'full_bytes': report['full_bytes'], 'upload_bytes': report['upload_bytes'],
+              'duration_seconds': report['duration_seconds'], 'no_changes': report['no_changes'],
+              'published': report['published'], 'version': report.get('version'),
+              'dry_run': not report['published'] and (os.environ.get('MAP_PUBLICATION_ENABLED') != 'true'
+                  or os.environ.get('EVENT_NAME') == 'workflow_dispatch' and os.environ.get('INPUT_DRY_RUN') == 'true'),
+          }
+          if report['published']:
+              status['last_successful_publication_utc'] = report['checked_utc']
+          path.write_text(json.dumps(status, indent=2) + '\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publication-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record successful map source check"
+            git push origin "HEAD:${BRANCH_NAME}"
+          fi
