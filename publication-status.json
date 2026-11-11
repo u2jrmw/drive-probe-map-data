@@ -49,10 +49,10 @@
       "last_published_version": "2026-11-08-61464a4c5f-f1-20261110214343"
     },
     "us-wi": {
-      "last_successful_check_utc": "2026-11-11T00:33:34.370821+00:00",
+      "last_successful_check_utc": "2026-11-11T15:35:48.481931+00:00",
       "source_data_utc": "2026-11-08T21:21:00Z",
       "last_check": {
-        "checked_utc": "2026-11-11T00:33:34.370821+00:00",
+        "checked_utc": "2026-11-11T15:35:48.481931+00:00",
         "source_data_utc": "2026-11-08T21:21:00Z",
         "changed": [],
         "reused": [
@@ -88,7 +88,7 @@
         "removed": [],
         "full_bytes": 358568882,
         "upload_bytes": 0,
-        "duration_seconds": 253.47,
+        "duration_seconds": 351.45,
         "no_changes": true,
         "published": false,
         "version": null,
