@@ -4,3 +4,6 @@ __pycache__/
 *.sqlite
 packs/
 .venv/
+
+publication-result.json
+resource-usage.txt

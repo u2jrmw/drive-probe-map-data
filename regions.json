@@ -1,10 +1,257 @@
 {
+  "us-ak": {
+    "name": "Alaska",
+    "source_url": "https://download.geofabrik.de/north-america/us/alaska-latest.osm.pbf",
+    "schedule_weight": 3
+  },
+  "us-al": {
+    "name": "Alabama",
+    "source_url": "https://download.geofabrik.de/north-america/us/alabama-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ar": {
+    "name": "Arkansas",
+    "source_url": "https://download.geofabrik.de/north-america/us/arkansas-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-az": {
+    "name": "Arizona",
+    "source_url": "https://download.geofabrik.de/north-america/us/arizona-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ca": {
+    "name": "California",
+    "source_url": "https://download.geofabrik.de/north-america/us/california-latest.osm.pbf",
+    "schedule_weight": 3
+  },
+  "us-co": {
+    "name": "Colorado",
+    "source_url": "https://download.geofabrik.de/north-america/us/colorado-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ct": {
+    "name": "Connecticut",
+    "source_url": "https://download.geofabrik.de/north-america/us/connecticut-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-de": {
+    "name": "Delaware",
+    "source_url": "https://download.geofabrik.de/north-america/us/delaware-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-dc": {
+    "name": "District of Columbia",
+    "source_url": "https://download.geofabrik.de/north-america/us/district-of-columbia-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-fl": {
+    "name": "Florida",
+    "source_url": "https://download.geofabrik.de/north-america/us/florida-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ga": {
+    "name": "Georgia",
+    "source_url": "https://download.geofabrik.de/north-america/us/georgia-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-hi": {
+    "name": "Hawaii",
+    "source_url": "https://download.geofabrik.de/north-america/us/hawaii-latest.osm.pbf",
+    "schedule_weight": 1
+  },
   "us-ia": {
     "name": "Iowa",
-    "source_url": "https://download.geofabrik.de/north-america/us/iowa-latest.osm.pbf"
+    "source_url": "https://download.geofabrik.de/north-america/us/iowa-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-id": {
+    "name": "Idaho",
+    "source_url": "https://download.geofabrik.de/north-america/us/idaho-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-il": {
+    "name": "Illinois",
+    "source_url": "https://download.geofabrik.de/north-america/us/illinois-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-in": {
+    "name": "Indiana",
+    "source_url": "https://download.geofabrik.de/north-america/us/indiana-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ks": {
+    "name": "Kansas",
+    "source_url": "https://download.geofabrik.de/north-america/us/kansas-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ky": {
+    "name": "Kentucky",
+    "source_url": "https://download.geofabrik.de/north-america/us/kentucky-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-la": {
+    "name": "Louisiana",
+    "source_url": "https://download.geofabrik.de/north-america/us/louisiana-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ma": {
+    "name": "Massachusetts",
+    "source_url": "https://download.geofabrik.de/north-america/us/massachusetts-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-md": {
+    "name": "Maryland",
+    "source_url": "https://download.geofabrik.de/north-america/us/maryland-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-me": {
+    "name": "Maine",
+    "source_url": "https://download.geofabrik.de/north-america/us/maine-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-mi": {
+    "name": "Michigan",
+    "source_url": "https://download.geofabrik.de/north-america/us/michigan-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-mn": {
+    "name": "Minnesota",
+    "source_url": "https://download.geofabrik.de/north-america/us/minnesota-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-mo": {
+    "name": "Missouri",
+    "source_url": "https://download.geofabrik.de/north-america/us/missouri-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ms": {
+    "name": "Mississippi",
+    "source_url": "https://download.geofabrik.de/north-america/us/mississippi-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-mt": {
+    "name": "Montana",
+    "source_url": "https://download.geofabrik.de/north-america/us/montana-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nc": {
+    "name": "North Carolina",
+    "source_url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nd": {
+    "name": "North Dakota",
+    "source_url": "https://download.geofabrik.de/north-america/us/north-dakota-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ne": {
+    "name": "Nebraska",
+    "source_url": "https://download.geofabrik.de/north-america/us/nebraska-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nh": {
+    "name": "New Hampshire",
+    "source_url": "https://download.geofabrik.de/north-america/us/new-hampshire-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nj": {
+    "name": "New Jersey",
+    "source_url": "https://download.geofabrik.de/north-america/us/new-jersey-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nm": {
+    "name": "New Mexico",
+    "source_url": "https://download.geofabrik.de/north-america/us/new-mexico-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-nv": {
+    "name": "Nevada",
+    "source_url": "https://download.geofabrik.de/north-america/us/nevada-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ny": {
+    "name": "New York",
+    "source_url": "https://download.geofabrik.de/north-america/us/new-york-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-oh": {
+    "name": "Ohio",
+    "source_url": "https://download.geofabrik.de/north-america/us/ohio-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ok": {
+    "name": "Oklahoma",
+    "source_url": "https://download.geofabrik.de/north-america/us/oklahoma-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-or": {
+    "name": "Oregon",
+    "source_url": "https://download.geofabrik.de/north-america/us/oregon-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-pa": {
+    "name": "Pennsylvania",
+    "source_url": "https://download.geofabrik.de/north-america/us/pennsylvania-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-ri": {
+    "name": "Rhode Island",
+    "source_url": "https://download.geofabrik.de/north-america/us/rhode-island-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-sc": {
+    "name": "South Carolina",
+    "source_url": "https://download.geofabrik.de/north-america/us/south-carolina-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-sd": {
+    "name": "South Dakota",
+    "source_url": "https://download.geofabrik.de/north-america/us/south-dakota-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-tn": {
+    "name": "Tennessee",
+    "source_url": "https://download.geofabrik.de/north-america/us/tennessee-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-tx": {
+    "name": "Texas",
+    "source_url": "https://download.geofabrik.de/north-america/us/texas-latest.osm.pbf",
+    "schedule_weight": 3
+  },
+  "us-ut": {
+    "name": "Utah",
+    "source_url": "https://download.geofabrik.de/north-america/us/utah-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-va": {
+    "name": "Virginia",
+    "source_url": "https://download.geofabrik.de/north-america/us/virginia-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-vt": {
+    "name": "Vermont",
+    "source_url": "https://download.geofabrik.de/north-america/us/vermont-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-wa": {
+    "name": "Washington",
+    "source_url": "https://download.geofabrik.de/north-america/us/washington-latest.osm.pbf",
+    "schedule_weight": 1
   },
   "us-wi": {
     "name": "Wisconsin",
-    "source_url": "https://download.geofabrik.de/north-america/us/wisconsin-latest.osm.pbf"
+    "source_url": "https://download.geofabrik.de/north-america/us/wisconsin-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-wv": {
+    "name": "West Virginia",
+    "source_url": "https://download.geofabrik.de/north-america/us/west-virginia-latest.osm.pbf",
+    "schedule_weight": 1
+  },
+  "us-wy": {
+    "name": "Wyoming",
+    "source_url": "https://download.geofabrik.de/north-america/us/wyoming-latest.osm.pbf",
+    "schedule_weight": 1
   }
 }

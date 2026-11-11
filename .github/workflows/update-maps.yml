@@ -2,17 +2,68 @@ name: Check and publish offline maps
 
 on:
   schedule:
-    - cron: '23 7 * * *'
+    - cron: '23 * * * *'
   workflow_dispatch:
     inputs:
       region:
-        description: Region to check
+        description: Due queue, explicit full queue, or one state/DC
         type: choice
         required: true
-        default: us-ia
+        default: due
         options:
+          - due
+          - all
+          - us-ak
+          - us-al
+          - us-ar
+          - us-az
+          - us-ca
+          - us-co
+          - us-ct
+          - us-dc
+          - us-de
+          - us-fl
+          - us-ga
+          - us-hi
           - us-ia
+          - us-id
+          - us-il
+          - us-in
+          - us-ks
+          - us-ky
+          - us-la
+          - us-ma
+          - us-md
+          - us-me
+          - us-mi
+          - us-mn
+          - us-mo
+          - us-ms
+          - us-mt
+          - us-nc
+          - us-nd
+          - us-ne
+          - us-nh
+          - us-nj
+          - us-nm
+          - us-nv
+          - us-ny
+          - us-oh
+          - us-ok
+          - us-or
+          - us-pa
+          - us-ri
+          - us-sc
+          - us-sd
+          - us-tn
+          - us-tx
+          - us-ut
+          - us-va
+          - us-vt
+          - us-wa
           - us-wi
+          - us-wv
+          - us-wy
       dry_run:
         description: Check and build without publishing
         type: boolean
@@ -25,24 +76,54 @@ on:
         default: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: map-publication
   cancel-in-progress: false
 
 jobs:
-  publish:
+  plan:
     if: github.event_name != 'schedule' || vars.MAP_PUBLICATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      regions: ${{ steps.queue.outputs.regions }}
+    steps:
+      - name: Check out the current branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Set up Python 3.11
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+      - name: Select due work from the region registry and attempt history
+        id: queue
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_REGION: ${{ inputs.region }}
+        run: |
+          set -euo pipefail
+          region="$INPUT_REGION"
+          if [[ "$EVENT_NAME" == "schedule" ]]; then region=due; fi
+          python scripts/publication_scheduler.py --region "${region:-due}" --budget 3 --github-output "$GITHUB_OUTPUT"
+
+  publish:
+    needs: plan
+    if: needs.plan.outputs.regions != '[]' && needs.plan.outputs.regions != ''
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 120
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix:
-        region: ${{ fromJSON(github.event_name == 'schedule' && '["us-ia","us-wi"]' || format('["{0}"]', inputs.region || 'us-ia')) }}
+        region: ${{ fromJSON(needs.plan.outputs.regions) }}
     steps:
       - name: Check out triggering branch
+        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.ref_name }}
@@ -52,6 +133,32 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Record start before expensive work
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          INPUT_REGION: ${{ matrix.region }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "$BRANCH_NAME"
+          git reset --hard "origin/$BRANCH_NAME"
+          python - <<'PY_STARTED'
+          import json, os, pathlib, sys
+          sys.path.insert(0, str(pathlib.Path('scripts').resolve()))
+          from publication_scheduler import record_attempt
+          path = pathlib.Path('publication-status.json')
+          status = json.loads(path.read_text()) if path.exists() else {}
+          status = record_attempt(status, os.environ['INPUT_REGION'], outcome='started',
+                                  run_url=os.environ['RUN_URL'])
+          path.write_text(json.dumps(status, indent=2) + '\n')
+          PY_STARTED
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publication-status.json
+          git commit -m "Record regional map publication start"
+          git push origin "HEAD:${BRANCH_NAME}"
+
       - name: Install pinned map build dependencies
         run: python -m pip install -r requirements-build.txt
 
@@ -59,6 +166,8 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Check and publish ${{ matrix.region }} map data
+        id: publish
+        timeout-minutes: 105
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAP_PUBLICATION_ENABLED: ${{ vars.MAP_PUBLICATION_ENABLED }}
@@ -70,6 +179,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          df -h .
+          free -h
           args=(--region "$INPUT_REGION" --summary "$RUN_SUMMARY")
           publish=false
           if [[ "$EVENT_NAME" == "schedule" ]]; then
@@ -85,39 +196,46 @@ jobs:
           if [[ "$INPUT_ALLOW_COUNT_ANOMALY" == "true" ]]; then
             args+=(--allow-count-anomaly)
           fi
-          /usr/bin/time -v -o resource-usage.txt python scripts/publish_maps.py "${args[@]}"
+          /usr/bin/time -v -o resource-usage.txt timeout --signal=TERM --kill-after=30s 100m python scripts/publish_maps.py "${args[@]}"
           cat resource-usage.txt
 
       - name: Add run details to summary
+        if: always() && steps.checkout.outcome == 'success'
+        env:
+          INPUT_REGION: ${{ matrix.region }}
         run: |
           {
-            echo "### ${{ matrix.region }} map publication check"
-            echo
-            cat publication-result.json
+            echo "### $INPUT_REGION map publication check"
+            if [[ -f publication-result.json ]]; then cat publication-result.json; fi
             echo
             echo '### Runner resource usage'
             echo '```text'
-            cat resource-usage.txt
+            if [[ -f resource-usage.txt ]]; then cat resource-usage.txt; fi
+            df -h .
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Commit successful check status
+      - name: Commit successful check status and every attempt
+        if: always() && steps.checkout.outcome == 'success'
         env:
           BRANCH_NAME: ${{ github.ref_name }}
           EVENT_NAME: ${{ github.event_name }}
+          INPUT_REGION: ${{ matrix.region }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
           MAP_PUBLICATION_ENABLED: ${{ vars.MAP_PUBLICATION_ENABLED }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin "$BRANCH_NAME"
           git reset --hard "origin/$BRANCH_NAME"
-          # Apply this region's result after syncing the branch's latest status.
-          python - <<'PY'
+          # The result remains an untracked workspace file across this sync.
+          python - <<'PY_STATUS'
           import json, os, pathlib, sys
           sys.path.insert(0, str(pathlib.Path('scripts').resolve()))
           from publication_status import update_status
-          report = json.loads(pathlib.Path('publication-result.json').read_text())
+          from publication_scheduler import record_attempt
           path = pathlib.Path('publication-status.json')
           status = json.loads(path.read_text()) if path.exists() else {}
           if os.environ['EVENT_NAME'] == 'schedule':
@@ -125,12 +243,22 @@ jobs:
           else:
               dry_run = (os.environ.get('MAP_PUBLICATION_ENABLED') != 'true'
                          or os.environ.get('INPUT_DRY_RUN') != 'false')
-          path.write_text(json.dumps(update_status(status, report, dry_run=dry_run), indent=2) + '\n')
-          PY
+          outcome = 'failure'
+          report_path = pathlib.Path('publication-result.json')
+          if os.environ['PUBLISH_OUTCOME'] == 'success' and report_path.exists():
+              report = json.loads(report_path.read_text())
+              if report.get('region') != os.environ['INPUT_REGION']:
+                  raise ValueError('Publication summary does not match the selected region')
+              status = update_status(status, report, dry_run=dry_run)
+              outcome = 'dry_run' if dry_run else 'success'
+          status = record_attempt(status, os.environ['INPUT_REGION'], outcome=outcome,
+                                  run_url=os.environ['RUN_URL'])
+          path.write_text(json.dumps(status, indent=2) + '\n')
+          PY_STATUS
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add publication-status.json
           if ! git diff --cached --quiet; then
-            git commit -m "Record successful map source check"
+            git commit -m "Record regional map publication attempt"
             git push origin "HEAD:${BRANCH_NAME}"
           fi

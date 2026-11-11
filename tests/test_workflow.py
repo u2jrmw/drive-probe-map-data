@@ -10,13 +10,17 @@ class WorkflowContractTests(unittest.TestCase):
     def setUpClass(cls):
         cls.workflow = (ROOT / '.github/workflows/update-maps.yml').read_text()
 
-    def test_daily_schedule_runs_both_states_and_manual_selection_is_explicit(self):
-        self.assertIn("cron: '23 7 * * *'", self.workflow)
-        self.assertIn('type: choice\n        required: true\n        default: us-ia\n        options:\n          - us-ia\n          - us-wi', self.workflow)
-        self.assertIn("fromJSON(github.event_name == 'schedule' && '[\"us-ia\",\"us-wi\"]'", self.workflow)
+    def test_hourly_dispatcher_targets_daily_checks_with_a_small_dynamic_matrix(self):
+        self.assertIn("cron: '23 * * * *'", self.workflow)
+        self.assertIn('scripts/publication_scheduler.py', self.workflow)
+        self.assertIn('--budget 3', self.workflow)
+        self.assertIn('--github-output "$GITHUB_OUTPUT"', self.workflow)
+        self.assertIn("fromJSON(needs.plan.outputs.regions)", self.workflow)
+        self.assertIn("needs.plan.outputs.regions != '[]'", self.workflow)
         self.assertIn('max-parallel: 1', self.workflow)
-        self.assertIn('dry_run:\n        description: Check and build without publishing\n        type: boolean\n        required: true\n        default: true', self.workflow)
-        self.assertIn('allow_count_anomaly:\n        description: Allow an explained road or speed-limit count drop\n        type: boolean\n        required: true\n        default: false', self.workflow)
+        self.assertIn('default: due', self.workflow)
+        self.assertIn('default: true', self.workflow)
+        self.assertIn('allow_count_anomaly:', self.workflow)
 
     def test_job_is_guarded_serialized_bounded_and_minimally_privileged(self):
         self.assertIn("contents: write", self.workflow)
@@ -43,16 +47,23 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn('publication-status.json', self.workflow)
         self.assertIn('publication_status import update_status', self.workflow)
         self.assertIn('update_status(status, report, dry_run=dry_run)', self.workflow)
+        self.assertIn('record_attempt', self.workflow)
+        self.assertIn("steps.publish.outcome", self.workflow)
+        self.assertIn('always()', self.workflow)
+        self.assertIn('timeout-minutes: 105', self.workflow)
+        self.assertIn('timeout --signal=TERM --kill-after=30s 100m', self.workflow)
+        self.assertIn("outcome='started'", self.workflow)
+        self.assertLess(self.workflow.index("outcome='started'"), self.workflow.index('Install pinned map build dependencies'))
         self.assertIn('git diff --cached --quiet', self.workflow)
         self.assertIn('HEAD:${BRANCH_NAME}', self.workflow)
 
     def test_readme_documents_safe_setup_and_freshness_limits(self):
         readme = (ROOT / 'README.md').read_text()
         for detail in (
-            '07:23 UTC', 'MAP_PUBLICATION_ENABLED', 'dry_run` input defaults to true',
+            'hourly', '24 hours', 'MAP_PUBLICATION_ENABLED', 'dry_run` input defaults to true',
             'publication-status.json', '60 days', 'never uses trip recordings',
-            'does not promise unlimited free runner capacity',
-            'Iowa and Wisconsin', 'us-wi', 'keyed by region ID', 'one region at a time',
+            'does not promise unlimited free runner capacity', '50 states', 'DC',
+            'one region at a time', 'six hours', '2 GiB',
         ):
             with self.subTest(detail=detail):
                 self.assertIn(detail, readme)

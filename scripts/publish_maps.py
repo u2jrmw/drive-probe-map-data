@@ -91,9 +91,18 @@ class GitHubTransport:
                 self.gh('release','upload','catalog-v1',str(path),'--clobber')
                 raise
 
+def validate_release_assets(files):
+    # Releases are the download channel, not Actions artifacts or Git history.
+    if len(files)>1000:raise ValueError('A release cannot contain more than 1000 assets')
+    for entry in files:
+        size=entry.get('bytes')
+        if type(size) is not int or not 0<size<2*1024**3:
+            raise ValueError('Release assets must be positive and smaller than 2 GiB: '+str(entry.get('path')))
+
 def publish_prepared(transport,tag,directory,region):
     # Only upload entries belonging to this immutable release, not reused older grids.
     files=[f for f in region['files'] if '/'+tag+'/' in f['url']]
+    validate_release_assets(files)
     transport.upload(tag,directory,files)
     transport.verify(region['files'])
     current=transport.catalog()
@@ -125,6 +134,9 @@ def publish_region(region_id,*,dry_run=True,allow_count_anomaly=False,source_pat
         source=pathlib.Path(source_path) if source_path else root/'source.osm.pbf'
         if not source_path:download(region['source_url'],source)
         raw=root/'raw';build(str(source),raw,region['name'],region['source_url'])
+        # The builder has recorded the source hash/date. Reclaim this owned
+        # temporary download before staging another full copy of a large state.
+        if not source_path:source.unlink()
         manifest=json.loads((raw/'manifest.json').read_text())
         source_time=manifest['data_timestamp']
         validate_source(source_time,latest_source(old_manifest) if old_manifest else None)
@@ -148,10 +160,12 @@ def publish_region(region_id,*,dry_run=True,allow_count_anomaly=False,source_pat
             result=catalog['regions'][0];result['source_data_utc']=source_time
             report['full_bytes']=result['download_bytes']
             report['upload_bytes']=sum(f['bytes'] for f in result['files'] if '/'+tag+'/' in f['url'])
+            validate_release_assets([f for f in result['files'] if '/'+tag+'/' in f['url']])
             report['version']=version
             if not dry_run:
                 if stage_only:
                     new_files=[f for f in result['files'] if '/'+tag+'/' in f['url']]
+                    validate_release_assets(new_files)
                     transport.upload(tag,output,new_files);transport.verify(result['files'])
                     report['staged']=True
                     report['candidate_catalog']=merge_catalog(previous,result,datetime.datetime.now(UTC).isoformat())

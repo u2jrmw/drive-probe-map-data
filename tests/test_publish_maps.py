@@ -1,4 +1,5 @@
-import datetime, importlib.util, pathlib, unittest
+import datetime, importlib.util, pathlib, unittest, tempfile, json
+from unittest import mock
 spec=importlib.util.spec_from_file_location('publish_maps',pathlib.Path(__file__).parents[1]/'scripts/publish_maps.py')
 p=importlib.util.module_from_spec(spec);spec.loader.exec_module(p)
 class SourceTests(unittest.TestCase):
@@ -32,6 +33,30 @@ class SourceTests(unittest.TestCase):
   t=Transport(True)
   with self.assertRaises(ValueError):p.publish_prepared(t,'tag',pathlib.Path('.'),region)
   self.assertNotIn('promote',t.events)
+ def test_release_limits_are_checked_before_upload(self):
+  p.validate_release_assets([{'path':'roads.sqlite','bytes':2*1024**3-1}])
+  for files in [[{'path':'too-big.sqlite','bytes':2*1024**3}], [{'path':'x','bytes':1}]*1001]:
+   with self.assertRaises(ValueError):p.validate_release_assets(files)
+ def test_invalid_asset_cannot_promote_a_catalog(self):
+  class Transport:
+   def upload(self,*args):raise AssertionError('Must reject oversized files before any upload')
+  region={'id':'us-ca','files':[{'path':'roads.sqlite','url':'https://example.test/tag/roads.sqlite','bytes':2*1024**3}]}
+  with self.assertRaises(ValueError):p.publish_prepared(Transport(),'tag',pathlib.Path('.'),region)
+ def test_dry_run_validates_the_same_release_limits_as_publication(self):
+  class Transport:
+   def catalog(self):return {'schema':1,'regions':[]}
+   def upload(self,*args):raise AssertionError('A dry run must not upload')
+  def fake_build(source,output,name,url):
+   output.mkdir()
+   manifest={'data_timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(), 'source_sha256':'a'*64,'counts':{'roads':1,'explicit_limits':0},'shards':[]}
+   (output/'manifest.json').write_text(json.dumps(manifest))
+  for count,size in [(1,2*1024**3),(1001,1)]:
+   def fake_package(raw,output,region_id,version,base,**kwargs):
+    return {'regions':[{'id':region_id,'files':[{'path':f'roads-{i}.sqlite','url':base+f'/roads-{i}.sqlite','bytes':size} for i in range(count)],'download_bytes':count*size}]}
+   with tempfile.TemporaryDirectory() as root:
+    source=pathlib.Path(root)/'input.pbf';source.write_bytes(b'fixture')
+    with mock.patch('build_osm_roads.build',side_effect=fake_build),mock.patch('package_region.package',side_effect=fake_package):
+     with self.assertRaises(ValueError):p.publish_region('us-ca',dry_run=True,source_path=source,transport=Transport())
  def test_unknown_source_on_legacy_refresh_fails_closed(self):
   self.assertEqual(p.latest_source({'data_timestamp':'2026-11-07T00:00:00Z','live_osm_refresh_utc':'2026-11-08T00:00:00Z'}),'2026-11-08T00:00:00Z')
 if __name__=='__main__':unittest.main()
