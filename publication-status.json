@@ -122,6 +122,11 @@
       },
       "last_successful_publication_utc": "2026-11-11T22:48:57.829570+00:00",
       "last_published_version": "2026-11-10-bfe36a2041-f1-20261111224857"
+    },
+    "us-ca": {
+      "last_attempt_utc": "2026-11-11T22:49:55.275258+00:00",
+      "last_attempt_outcome": "started",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43114947009"
     }
   }
 }
