@@ -12,6 +12,7 @@ on:
         default: us-ia
         options:
           - us-ia
+          - us-wi
       dry_run:
         description: Check and build without publishing
         type: boolean
@@ -35,6 +36,11 @@ jobs:
     if: github.event_name != 'schedule' || vars.MAP_PUBLICATION_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        region: ${{ fromJSON(github.event_name == 'schedule' && '["us-ia","us-wi"]' || format('["{0}"]', inputs.region || 'us-ia')) }}
     steps:
       - name: Check out triggering branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -52,12 +58,12 @@ jobs:
       - name: Run the full Python test suite
         run: python -m unittest discover -s tests -v
 
-      - name: Check and publish Iowa map data
+      - name: Check and publish ${{ matrix.region }} map data
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAP_PUBLICATION_ENABLED: ${{ vars.MAP_PUBLICATION_ENABLED }}
           EVENT_NAME: ${{ github.event_name }}
-          INPUT_REGION: ${{ inputs.region || 'us-ia' }}
+          INPUT_REGION: ${{ matrix.region }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
           INPUT_ALLOW_COUNT_ANOMALY: ${{ inputs.allow_count_anomaly }}
           RUN_SUMMARY: publication-result.json
@@ -85,7 +91,7 @@ jobs:
       - name: Add run details to summary
         run: |
           {
-            echo '### Map publication check'
+            echo "### ${{ matrix.region }} map publication check"
             echo
             cat publication-result.json
             echo
@@ -106,29 +112,20 @@ jobs:
           set -euo pipefail
           git fetch origin "$BRANCH_NAME"
           git reset --hard "origin/$BRANCH_NAME"
-          # Update status only after the publisher has completed successfully.
+          # Apply this region's result after syncing the branch's latest status.
           python - <<'PY'
-          import json, os, pathlib
+          import json, os, pathlib, sys
+          sys.path.insert(0, str(pathlib.Path('scripts').resolve()))
+          from publication_status import update_status
           report = json.loads(pathlib.Path('publication-result.json').read_text())
           path = pathlib.Path('publication-status.json')
-          status = json.loads(path.read_text()) if path.exists() else {'schema': 1, 'region': 'us-ia'}
-          previous_check = status.get('last_successful_check_utc')
-          if previous_check and previous_check > report['checked_utc']:
-              raise SystemExit('A newer successful check is already recorded; refusing to move status backward')
-          status['last_successful_check_utc'] = report['checked_utc']
-          status['source_data_utc'] = report['source_data_utc']
-          status['last_check'] = {
-              'checked_utc': report['checked_utc'], 'source_data_utc': report['source_data_utc'],
-              'changed': report['changed'], 'reused': report['reused'], 'removed': report['removed'],
-              'full_bytes': report['full_bytes'], 'upload_bytes': report['upload_bytes'],
-              'duration_seconds': report['duration_seconds'], 'no_changes': report['no_changes'],
-              'published': report['published'], 'version': report.get('version'),
-              'dry_run': not report['published'] and (os.environ.get('MAP_PUBLICATION_ENABLED') != 'true'
-                  or os.environ.get('EVENT_NAME') == 'workflow_dispatch' and os.environ.get('INPUT_DRY_RUN') == 'true'),
-          }
-          if report['published']:
-              status['last_successful_publication_utc'] = report['checked_utc']
-          path.write_text(json.dumps(status, indent=2) + '\n')
+          status = json.loads(path.read_text()) if path.exists() else {}
+          if os.environ['EVENT_NAME'] == 'schedule':
+              dry_run = os.environ.get('MAP_PUBLICATION_ENABLED') != 'true'
+          else:
+              dry_run = (os.environ.get('MAP_PUBLICATION_ENABLED') != 'true'
+                         or os.environ.get('INPUT_DRY_RUN') != 'false')
+          path.write_text(json.dumps(update_status(status, report, dry_run=dry_run), indent=2) + '\n')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

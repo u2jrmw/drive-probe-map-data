@@ -1,1 +1,10 @@
-{"us-ia":{"name":"Iowa","source_url":"https://download.geofabrik.de/north-america/us/iowa-latest.osm.pbf"}}
+{
+  "us-ia": {
+    "name": "Iowa",
+    "source_url": "https://download.geofabrik.de/north-america/us/iowa-latest.osm.pbf"
+  },
+  "us-wi": {
+    "name": "Wisconsin",
+    "source_url": "https://download.geofabrik.de/north-america/us/wisconsin-latest.osm.pbf"
+  }
+}

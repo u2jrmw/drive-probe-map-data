@@ -10,9 +10,11 @@ class WorkflowContractTests(unittest.TestCase):
     def setUpClass(cls):
         cls.workflow = (ROOT / '.github/workflows/update-maps.yml').read_text()
 
-    def test_daily_schedule_and_manual_inputs_are_iowa_only_and_dry_by_default(self):
+    def test_daily_schedule_runs_both_states_and_manual_selection_is_explicit(self):
         self.assertIn("cron: '23 7 * * *'", self.workflow)
-        self.assertIn('type: choice\n        required: true\n        default: us-ia\n        options:\n          - us-ia', self.workflow)
+        self.assertIn('type: choice\n        required: true\n        default: us-ia\n        options:\n          - us-ia\n          - us-wi', self.workflow)
+        self.assertIn("fromJSON(github.event_name == 'schedule' && '[\"us-ia\",\"us-wi\"]'", self.workflow)
+        self.assertIn('max-parallel: 1', self.workflow)
         self.assertIn('dry_run:\n        description: Check and build without publishing\n        type: boolean\n        required: true\n        default: true', self.workflow)
         self.assertIn('allow_count_anomaly:\n        description: Allow an explained road or speed-limit count drop\n        type: boolean\n        required: true\n        default: false', self.workflow)
 
@@ -39,8 +41,8 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn('/usr/bin/time -v', self.workflow)
         self.assertIn('publication-result.json', self.workflow)
         self.assertIn('publication-status.json', self.workflow)
-        self.assertIn('last_successful_check_utc', self.workflow)
-        self.assertIn('last_successful_publication_utc', self.workflow)
+        self.assertIn('publication_status import update_status', self.workflow)
+        self.assertIn('update_status(status, report, dry_run=dry_run)', self.workflow)
         self.assertIn('git diff --cached --quiet', self.workflow)
         self.assertIn('HEAD:${BRANCH_NAME}', self.workflow)
 
@@ -50,6 +52,7 @@ class WorkflowContractTests(unittest.TestCase):
             '07:23 UTC', 'MAP_PUBLICATION_ENABLED', 'dry_run` input defaults to true',
             'publication-status.json', '60 days', 'never uses trip recordings',
             'does not promise unlimited free runner capacity',
+            'Iowa and Wisconsin', 'us-wi', 'keyed by region ID', 'one region at a time',
         ):
             with self.subTest(detail=detail):
                 self.assertIn(detail, readme)
