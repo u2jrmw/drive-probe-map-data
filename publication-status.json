@@ -2,10 +2,10 @@
   "schema": 2,
   "regions": {
     "us-ia": {
-      "last_successful_check_utc": "2026-11-11T00:15:01.513093+00:00",
+      "last_successful_check_utc": "2026-11-11T15:28:35.303425+00:00",
       "source_data_utc": "2026-11-08T21:21:00Z",
       "last_check": {
-        "checked_utc": "2026-11-11T00:15:01.513093+00:00",
+        "checked_utc": "2026-11-11T15:28:35.303425+00:00",
         "source_data_utc": "2026-11-08T21:21:00Z",
         "changed": [],
         "reused": [
@@ -39,7 +39,7 @@
         "removed": [],
         "full_bytes": 200695839,
         "upload_bytes": 0,
-        "duration_seconds": 87.56,
+        "duration_seconds": 119.84,
         "no_changes": true,
         "published": false,
         "version": null,
