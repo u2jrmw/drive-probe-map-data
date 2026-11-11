@@ -3,7 +3,7 @@
 The registry covers all 50 states and Washington, DC. Only verified published packs enter the app catalog. No private application code or driving data is used by this public pipeline.
 
 - Use standard public Ubuntu runners; do not enable billed larger runners, persistent Actions artifacts, LFS or large dependency/data caches.
-- An hourly queue targets successful source checks every 24 hours. Select at most three work units per run. Alaska, California and Texas consume the whole batch; other regions cost one unit.
+- An hourly queue targets successful source checks every 24 hours, using 23-hour eligibility to allow for dispatch and build latency. Select at most three work units per run. Alaska, California and Texas consume the whole batch; other regions cost one unit.
 - Prioritize existing overdue published regions, then bootstrap new ones fairly. Failed attempts are recorded separately from successful checks and wait six hours before retrying. Manual region/dry-run/explicit-all controls remain available.
 - Serialize publication and catalog promotion with the shared workflow concurrency group and a one-at-a-time matrix. Each region gets a fresh runner and a 120-minute timeout. Missed/queued cron runs select work from recorded status rather than permanently losing a fixed time slot.
 - Preserve per-region source-date/count/integrity gates, immutable grid URLs, complete catalog merges and last-good catalog restoration. Reject release assets >=2 GiB or releases over 1000 new assets before uploading. Reclaim owned temporary source downloads after conversion.

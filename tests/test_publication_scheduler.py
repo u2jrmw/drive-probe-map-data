@@ -25,13 +25,37 @@ def registry(*ids, weights=None):
 
 
 class PublicationSchedulerTests(unittest.TestCase):
-    def test_due_selection_includes_never_checked_and_exactly_24_hour_regions(self):
+    def test_due_selection_uses_23_hour_threshold_for_24_hour_cadence(self):
         config = registry('us-ia', 'us-wi', 'us-il')
         status = {'schema': 2, 'regions': {
-            'us-ia': {'last_successful_check_utc': stamp(23)},
-            'us-wi': {'last_successful_check_utc': stamp(24)},
+            'us-ia': {'last_successful_check_utc': stamp(22)},
+            'us-wi': {'last_successful_check_utc': stamp(23)},
         }}
         self.assertEqual(select_regions(config, status, now=NOW), ['us-il', 'us-wi'])
+
+    def test_three_minute_runs_with_hourly_dispatch_keep_all_regions_within_24_hours(self):
+        config = json.loads((ROOT / 'regions.json').read_text())
+        status = {'schema': 2, 'regions': {}}
+        completed = {region_id: [] for region_id in config}
+        start = NOW
+        for hour in range(8 * 24):
+            dispatch = start + datetime.timedelta(hours=hour)
+            selected = select_regions(config, status, now=dispatch, budget=3)
+            completion = dispatch + datetime.timedelta(minutes=3)
+            for region_id in selected:
+                entry = status['regions'].setdefault(region_id, {})
+                entry['last_successful_check_utc'] = completion.isoformat()
+                entry['last_attempt_utc'] = completion.isoformat()
+                entry['last_attempt_outcome'] = 'success'
+                entry['last_check'] = {'dry_run': False}
+                completed[region_id].append(completion)
+
+        for region_id, timestamps in completed.items():
+            with self.subTest(region=region_id):
+                self.assertTrue(timestamps, f'{region_id} never completed a bootstrap check')
+                self.assertLessEqual(timestamps[0] - start, datetime.timedelta(hours=24))
+                for previous, following in zip(timestamps, timestamps[1:]):
+                    self.assertLessEqual(following - previous, datetime.timedelta(hours=24))
 
     def test_only_failed_attempts_apply_six_hour_backoff(self):
         config = registry('us-ia', 'us-wi', 'us-il')

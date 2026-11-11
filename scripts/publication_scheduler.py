@@ -1,4 +1,4 @@
-"""Select bounded, fair regions for scheduled OSM package publication."""
+"""Select fair publication batches; 23h eligibility targets about 24h completions."""
 from __future__ import annotations
 import argparse
 import copy
@@ -12,7 +12,8 @@ from publication_status import _regions_from
 
 UTC = datetime.timezone.utc
 _REGION_ID = re.compile(r'us-[a-z]{2}\Z')
-_CHECK_INTERVAL = datetime.timedelta(hours=24)
+# One-hour headroom targets roughly 24-hour completions with an hourly dispatcher.
+_CHECK_INTERVAL = datetime.timedelta(hours=23)
 _FAILURE_BACKOFF = datetime.timedelta(hours=6)
 
 
