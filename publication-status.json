@@ -49,12 +49,13 @@
       "last_published_version": "2026-11-08-61464a4c5f-f1-20261110214343"
     },
     "us-wi": {
-      "last_successful_check_utc": "2026-11-11T00:29:03.403967+00:00",
+      "last_successful_check_utc": "2026-11-11T00:33:34.370821+00:00",
       "source_data_utc": "2026-11-08T21:21:00Z",
       "last_check": {
-        "checked_utc": "2026-11-11T00:29:03.403967+00:00",
+        "checked_utc": "2026-11-11T00:33:34.370821+00:00",
         "source_data_utc": "2026-11-08T21:21:00Z",
-        "changed": [
+        "changed": [],
+        "reused": [
           "roads_-87_45.sqlite",
           "roads_-88_42.sqlite",
           "roads_-88_43.sqlite",
@@ -84,14 +85,13 @@
           "roads_-93_45.sqlite",
           "roads_-93_46.sqlite"
         ],
-        "reused": [],
         "removed": [],
         "full_bytes": 358568882,
-        "upload_bytes": 358568882,
-        "duration_seconds": 332.89,
-        "no_changes": false,
-        "published": true,
-        "version": "2026-11-08-2b134d5dcf-f1-20261111002539",
+        "upload_bytes": 0,
+        "duration_seconds": 253.47,
+        "no_changes": true,
+        "published": false,
+        "version": null,
         "dry_run": false
       },
       "last_successful_publication_utc": "2026-11-11T00:29:03.403967+00:00",
