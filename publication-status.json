@@ -44,5 +44,7 @@
     "published": false,
     "version": "2026-11-08-61464a4c5f-f1-20261110214717",
     "dry_run": true
-  }
+  },
+  "last_successful_publication_utc": "2026-11-10T21:46:00.717678+00:00",
+  "last_published_version": "2026-11-08-61464a4c5f-f1-20261110214343"
 }
