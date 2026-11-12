@@ -217,15 +217,16 @@
       }
     },
     "us-ak": {
-      "last_attempt_utc": "2026-11-12T04:05:02.195042+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-12T04:07:13.016212+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
-      "last_successful_check_utc": "2026-11-12T03:57:42.180594+00:00",
+      "last_successful_check_utc": "2026-11-12T04:07:12.547763+00:00",
       "source_data_utc": "2026-11-11T21:22:47Z",
       "last_check": {
-        "checked_utc": "2026-11-12T03:57:42.180594+00:00",
+        "checked_utc": "2026-11-12T04:07:12.547763+00:00",
         "source_data_utc": "2026-11-11T21:22:47Z",
-        "changed": [
+        "changed": [],
+        "reused": [
           "roads_-130_55.sqlite",
           "roads_-130_56.sqlite",
           "roads_-131_54.sqlite",
@@ -522,14 +523,13 @@
           "roads_173_52.sqlite",
           "roads_174_52.sqlite"
         ],
-        "reused": [],
         "removed": [],
         "full_bytes": 55960642,
-        "upload_bytes": 55960642,
-        "duration_seconds": 471.31,
-        "no_changes": false,
-        "published": true,
-        "version": "2026-11-11-9189108990-f1-20261112035742",
+        "upload_bytes": 0,
+        "duration_seconds": 127.25,
+        "no_changes": true,
+        "published": false,
+        "version": null,
         "dry_run": false
       },
       "last_successful_publication_utc": "2026-11-12T03:57:42.180594+00:00",
