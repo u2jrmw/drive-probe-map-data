@@ -2828,9 +2828,52 @@
       "last_published_version": "2026-11-11-5b3af64231-f1-20261112071632"
     },
     "us-va": {
-      "last_attempt_utc": "2026-11-12T07:18:18.740194+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T07:26:45.102322+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T07:24:08.725324+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T07:24:08.725324+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-76_36.sqlite",
+          "roads_-76_37.sqlite",
+          "roads_-76_38.sqlite",
+          "roads_-77_36.sqlite",
+          "roads_-77_37.sqlite",
+          "roads_-77_38.sqlite",
+          "roads_-78_36.sqlite",
+          "roads_-78_37.sqlite",
+          "roads_-78_38.sqlite",
+          "roads_-78_39.sqlite",
+          "roads_-79_36.sqlite",
+          "roads_-79_37.sqlite",
+          "roads_-79_38.sqlite",
+          "roads_-79_39.sqlite",
+          "roads_-80_36.sqlite",
+          "roads_-80_37.sqlite",
+          "roads_-80_38.sqlite",
+          "roads_-81_36.sqlite",
+          "roads_-81_37.sqlite",
+          "roads_-82_36.sqlite",
+          "roads_-82_37.sqlite",
+          "roads_-83_36.sqlite",
+          "roads_-83_37.sqlite",
+          "roads_-84_36.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 674520283,
+        "upload_bytes": 674520283,
+        "duration_seconds": 502.38,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-c87c5e4548-f1-20261112072408",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T07:24:08.725324+00:00",
+      "last_published_version": "2026-11-11-c87c5e4548-f1-20261112072408"
     }
   }
 }
