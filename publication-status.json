@@ -2171,9 +2171,60 @@
       "last_published_version": "2026-11-11-8deedb61a6-f1-20261112062156"
     },
     "us-ny": {
-      "last_attempt_utc": "2026-11-12T06:24:03.223271+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T06:29:24.407449+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T06:27:37.869336+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T06:27:37.869336+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-72_41.sqlite",
+          "roads_-73_40.sqlite",
+          "roads_-73_41.sqlite",
+          "roads_-74_40.sqlite",
+          "roads_-74_41.sqlite",
+          "roads_-74_42.sqlite",
+          "roads_-74_43.sqlite",
+          "roads_-74_44.sqlite",
+          "roads_-74_45.sqlite",
+          "roads_-75_40.sqlite",
+          "roads_-75_41.sqlite",
+          "roads_-75_42.sqlite",
+          "roads_-75_43.sqlite",
+          "roads_-75_44.sqlite",
+          "roads_-75_45.sqlite",
+          "roads_-76_41.sqlite",
+          "roads_-76_42.sqlite",
+          "roads_-76_43.sqlite",
+          "roads_-76_44.sqlite",
+          "roads_-77_41.sqlite",
+          "roads_-77_42.sqlite",
+          "roads_-77_43.sqlite",
+          "roads_-77_44.sqlite",
+          "roads_-78_41.sqlite",
+          "roads_-78_42.sqlite",
+          "roads_-78_43.sqlite",
+          "roads_-79_41.sqlite",
+          "roads_-79_42.sqlite",
+          "roads_-79_43.sqlite",
+          "roads_-80_41.sqlite",
+          "roads_-80_42.sqlite",
+          "roads_-80_43.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 477444700,
+        "upload_bytes": 477444700,
+        "duration_seconds": 314.88,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-9b65b6a76b-f1-20261112062737",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T06:27:37.869336+00:00",
+      "last_published_version": "2026-11-11-9b65b6a76b-f1-20261112062737"
     }
   }
 }
