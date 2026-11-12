@@ -1617,9 +1617,51 @@
       "last_published_version": "2026-11-11-e80b805e07-f1-20261112055207"
     },
     "us-ms": {
-      "last_attempt_utc": "2026-11-12T05:54:12.692131+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T05:55:59.136779+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T05:55:02.057235+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T05:55:02.057235+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-89_30.sqlite",
+          "roads_-89_31.sqlite",
+          "roads_-89_32.sqlite",
+          "roads_-89_33.sqlite",
+          "roads_-89_34.sqlite",
+          "roads_-89_35.sqlite",
+          "roads_-90_30.sqlite",
+          "roads_-90_31.sqlite",
+          "roads_-90_32.sqlite",
+          "roads_-90_33.sqlite",
+          "roads_-90_34.sqlite",
+          "roads_-90_35.sqlite",
+          "roads_-91_30.sqlite",
+          "roads_-91_31.sqlite",
+          "roads_-91_32.sqlite",
+          "roads_-91_33.sqlite",
+          "roads_-91_34.sqlite",
+          "roads_-91_35.sqlite",
+          "roads_-92_30.sqlite",
+          "roads_-92_31.sqlite",
+          "roads_-92_32.sqlite",
+          "roads_-92_33.sqlite",
+          "roads_-92_34.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 174365457,
+        "upload_bytes": 174365457,
+        "duration_seconds": 101.93,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-3d3ebbffe2-f1-20261112055502",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T05:55:02.057235+00:00",
+      "last_published_version": "2026-11-11-3d3ebbffe2-f1-20261112055502"
     }
   }
 }
