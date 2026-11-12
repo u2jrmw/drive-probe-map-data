@@ -1224,9 +1224,51 @@
       "last_published_version": "2026-11-11-8f5bcdecde-f1-20261112052034"
     },
     "us-ky": {
-      "last_attempt_utc": "2026-11-12T05:22:35.278628+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T05:25:42.714272+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T05:24:27.498202+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T05:24:27.498202+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-82_37.sqlite",
+          "roads_-83_36.sqlite",
+          "roads_-83_37.sqlite",
+          "roads_-83_38.sqlite",
+          "roads_-84_36.sqlite",
+          "roads_-84_37.sqlite",
+          "roads_-84_38.sqlite",
+          "roads_-85_36.sqlite",
+          "roads_-85_37.sqlite",
+          "roads_-85_38.sqlite",
+          "roads_-85_39.sqlite",
+          "roads_-86_36.sqlite",
+          "roads_-86_37.sqlite",
+          "roads_-86_38.sqlite",
+          "roads_-87_36.sqlite",
+          "roads_-87_37.sqlite",
+          "roads_-87_38.sqlite",
+          "roads_-88_36.sqlite",
+          "roads_-88_37.sqlite",
+          "roads_-89_36.sqlite",
+          "roads_-89_37.sqlite",
+          "roads_-90_36.sqlite",
+          "roads_-90_37.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 322415370,
+        "upload_bytes": 322415370,
+        "duration_seconds": 183.9,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-d783ed76cc-f1-20261112052427",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T05:24:27.498202+00:00",
+      "last_published_version": "2026-11-11-d783ed76cc-f1-20261112052427"
     }
   }
 }
