@@ -950,9 +950,43 @@
       "last_published_version": "2026-11-11-112de4ac11-f1-20261112045647"
     },
     "us-hi": {
-      "last_attempt_utc": "2026-11-12T04:58:31.652206+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T04:59:33.315084+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T04:58:56.687375+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T04:58:56.687375+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-155_19.sqlite",
+          "roads_-156_18.sqlite",
+          "roads_-156_19.sqlite",
+          "roads_-156_20.sqlite",
+          "roads_-157_19.sqlite",
+          "roads_-157_20.sqlite",
+          "roads_-157_21.sqlite",
+          "roads_-158_20.sqlite",
+          "roads_-158_21.sqlite",
+          "roads_-159_21.sqlite",
+          "roads_-160_21.sqlite",
+          "roads_-160_22.sqlite",
+          "roads_-161_21.sqlite",
+          "roads_-167_23.sqlite",
+          "roads_-178_28.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 36621717,
+        "upload_bytes": 36621717,
+        "duration_seconds": 53.54,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-5ef4586630-f1-20261112045856",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T04:58:56.687375+00:00",
+      "last_published_version": "2026-11-11-5ef4586630-f1-20261112045856"
     }
   }
 }
