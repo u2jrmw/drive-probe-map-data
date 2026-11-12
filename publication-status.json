@@ -1764,9 +1764,55 @@
       "last_published_version": "2026-11-11-76d6358cb9-f1-20261112055740"
     },
     "us-nc": {
-      "last_attempt_utc": "2026-11-12T06:00:16.068724+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T06:05:49.707639+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T06:03:47.942996+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T06:03:47.942996+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-76_35.sqlite",
+          "roads_-76_36.sqlite",
+          "roads_-77_34.sqlite",
+          "roads_-77_35.sqlite",
+          "roads_-77_36.sqlite",
+          "roads_-78_33.sqlite",
+          "roads_-78_34.sqlite",
+          "roads_-78_35.sqlite",
+          "roads_-78_36.sqlite",
+          "roads_-79_33.sqlite",
+          "roads_-79_34.sqlite",
+          "roads_-79_35.sqlite",
+          "roads_-79_36.sqlite",
+          "roads_-80_34.sqlite",
+          "roads_-80_35.sqlite",
+          "roads_-80_36.sqlite",
+          "roads_-81_34.sqlite",
+          "roads_-81_35.sqlite",
+          "roads_-81_36.sqlite",
+          "roads_-82_35.sqlite",
+          "roads_-82_36.sqlite",
+          "roads_-83_35.sqlite",
+          "roads_-83_36.sqlite",
+          "roads_-84_34.sqlite",
+          "roads_-84_35.sqlite",
+          "roads_-85_34.sqlite",
+          "roads_-85_35.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 693785129,
+        "upload_bytes": 693785129,
+        "duration_seconds": 329.89,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-57de4edf2f-f1-20261112060347",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T06:03:47.942996+00:00",
+      "last_published_version": "2026-11-11-57de4edf2f-f1-20261112060347"
     }
   }
 }
