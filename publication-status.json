@@ -842,9 +842,59 @@
       "last_published_version": "2026-11-11-21aa37a392-f1-20261112044207"
     },
     "us-fl": {
-      "last_attempt_utc": "2026-11-12T04:42:31.913320+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T04:52:38.981946+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T04:50:24.945848+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T04:50:24.945848+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-81_24.sqlite",
+          "roads_-81_25.sqlite",
+          "roads_-81_26.sqlite",
+          "roads_-81_27.sqlite",
+          "roads_-81_28.sqlite",
+          "roads_-81_29.sqlite",
+          "roads_-82_24.sqlite",
+          "roads_-82_25.sqlite",
+          "roads_-82_26.sqlite",
+          "roads_-82_27.sqlite",
+          "roads_-82_28.sqlite",
+          "roads_-82_29.sqlite",
+          "roads_-82_30.sqlite",
+          "roads_-83_24.sqlite",
+          "roads_-83_26.sqlite",
+          "roads_-83_27.sqlite",
+          "roads_-83_28.sqlite",
+          "roads_-83_29.sqlite",
+          "roads_-83_30.sqlite",
+          "roads_-84_29.sqlite",
+          "roads_-84_30.sqlite",
+          "roads_-85_29.sqlite",
+          "roads_-85_30.sqlite",
+          "roads_-85_31.sqlite",
+          "roads_-86_29.sqlite",
+          "roads_-86_30.sqlite",
+          "roads_-86_31.sqlite",
+          "roads_-87_30.sqlite",
+          "roads_-87_31.sqlite",
+          "roads_-88_30.sqlite",
+          "roads_-88_31.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 758257859,
+        "upload_bytes": 758257859,
+        "duration_seconds": 601.39,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-dc51cdbd9c-f1-20261112045024",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T04:50:24.945848+00:00",
+      "last_published_version": "2026-11-11-dc51cdbd9c-f1-20261112045024"
     }
   }
 }
