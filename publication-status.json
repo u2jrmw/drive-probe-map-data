@@ -897,9 +897,57 @@
       "last_published_version": "2026-11-11-dc51cdbd9c-f1-20261112045024"
     },
     "us-ga": {
-      "last_attempt_utc": "2026-11-12T04:52:46.198163+00:00",
-      "last_attempt_outcome": "started",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-12T04:58:21.539584+00:00",
+      "last_attempt_outcome": "success",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677",
+      "last_successful_check_utc": "2026-11-12T04:56:47.917583+00:00",
+      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_check": {
+        "checked_utc": "2026-11-12T04:56:47.917583+00:00",
+        "source_data_utc": "2026-11-11T21:22:47Z",
+        "changed": [
+          "roads_-81_31.sqlite",
+          "roads_-81_32.sqlite",
+          "roads_-82_30.sqlite",
+          "roads_-82_31.sqlite",
+          "roads_-82_32.sqlite",
+          "roads_-82_33.sqlite",
+          "roads_-83_30.sqlite",
+          "roads_-83_31.sqlite",
+          "roads_-83_32.sqlite",
+          "roads_-83_33.sqlite",
+          "roads_-83_34.sqlite",
+          "roads_-84_30.sqlite",
+          "roads_-84_31.sqlite",
+          "roads_-84_32.sqlite",
+          "roads_-84_33.sqlite",
+          "roads_-84_34.sqlite",
+          "roads_-84_35.sqlite",
+          "roads_-85_30.sqlite",
+          "roads_-85_31.sqlite",
+          "roads_-85_32.sqlite",
+          "roads_-85_33.sqlite",
+          "roads_-85_34.sqlite",
+          "roads_-85_35.sqlite",
+          "roads_-86_30.sqlite",
+          "roads_-86_31.sqlite",
+          "roads_-86_32.sqlite",
+          "roads_-86_33.sqlite",
+          "roads_-86_34.sqlite",
+          "roads_-86_35.sqlite"
+        ],
+        "reused": [],
+        "removed": [],
+        "full_bytes": 546497872,
+        "upload_bytes": 546497872,
+        "duration_seconds": 331.59,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-11-112de4ac11-f1-20261112045647",
+        "dry_run": false
+      },
+      "last_successful_publication_utc": "2026-11-12T04:56:47.917583+00:00",
+      "last_published_version": "2026-11-11-112de4ac11-f1-20261112045647"
     }
   }
 }
