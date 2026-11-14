@@ -214,7 +214,12 @@ class PublicationSchedulerTests(unittest.TestCase):
             status = temp / 'status.json'
             output = temp / 'github-output'
             config.write_text(json.dumps(registry('us-wi', 'us-ia')))
-            status.write_text(json.dumps({'schema': 2, 'regions': {'us-ia': {'last_successful_check_utc': stamp(1)}}}))
+            # The subprocess uses the real clock, so its fixture must be recent
+            # relative to that clock rather than the unit tests' fixed NOW.
+            recent_check = datetime.datetime.now(UTC) - datetime.timedelta(hours=1)
+            status.write_text(json.dumps({'schema': 2, 'regions': {'us-ia': {
+                'last_successful_check_utc': recent_check.isoformat(),
+            }}}))
             result = subprocess.run([
                 sys.executable, str(ROOT / 'scripts/publication_scheduler.py'),
                 '--region', 'due', '--status', str(status), '--config', str(config), '--budget', '3',
