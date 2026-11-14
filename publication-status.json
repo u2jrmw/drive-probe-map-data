@@ -48,9 +48,9 @@
       },
       "last_successful_publication_utc": "2026-11-12T05:01:56.241826+00:00",
       "last_published_version": "2026-11-11-7b304a68c3-f1-20261112050156",
-      "last_attempt_utc": "2026-11-12T05:02:54.158478+00:00",
-      "last_attempt_outcome": "success",
-      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
+      "last_attempt_utc": "2026-11-14T19:22:04.281844+00:00",
+      "last_attempt_outcome": "started",
+      "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43631687884"
     },
     "us-wi": {
       "last_successful_check_utc": "2026-11-12T07:38:23.972510+00:00",
