@@ -106,31 +106,30 @@
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43151762677"
     },
     "us-dc": {
-      "last_attempt_utc": "2026-11-14T01:50:59.668076+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-14T01:51:25.180776+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43542969007",
-      "last_successful_check_utc": "2026-11-12T04:41:18.478088+00:00",
-      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_successful_check_utc": "2026-11-14T01:51:13.717729+00:00",
+      "source_data_utc": "2026-11-12T21:23:05Z",
       "last_check": {
-        "checked_utc": "2026-11-12T04:41:18.478088+00:00",
-        "source_data_utc": "2026-11-11T21:22:47Z",
+        "checked_utc": "2026-11-14T01:51:13.717729+00:00",
+        "source_data_utc": "2026-11-12T21:23:05Z",
         "changed": [
+          "roads_-77_38.sqlite",
           "roads_-78_38.sqlite"
         ],
-        "reused": [
-          "roads_-77_38.sqlite"
-        ],
+        "reused": [],
         "removed": [],
         "full_bytes": 11302845,
-        "upload_bytes": 7239613,
-        "duration_seconds": 26.06,
+        "upload_bytes": 11302845,
+        "duration_seconds": 22.11,
         "no_changes": false,
         "published": true,
-        "version": "2026-11-11-77dddab38e-f1-20261112044118",
+        "version": "2026-11-12-fc94d94d82-f1-20261114015113",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-12T04:41:18.478088+00:00",
-      "last_published_version": "2026-11-11-77dddab38e-f1-20261112044118"
+      "last_successful_publication_utc": "2026-11-14T01:51:13.717729+00:00",
+      "last_published_version": "2026-11-12-fc94d94d82-f1-20261114015113"
     },
     "us-ca": {
       "last_attempt_utc": "2026-11-13T23:44:05.723912+00:00",
