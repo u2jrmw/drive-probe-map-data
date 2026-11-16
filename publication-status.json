@@ -2011,37 +2011,38 @@
       "last_published_version": "2026-11-15-62457dd4fd-f1-20261116030626"
     },
     "us-nj": {
-      "last_attempt_utc": "2026-11-16T03:07:14.922600+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-16T03:11:37.413113+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/43794926051",
-      "last_successful_check_utc": "2026-11-12T06:14:35.881654+00:00",
-      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_successful_check_utc": "2026-11-16T03:10:53.138453+00:00",
+      "source_data_utc": "2026-11-15T21:22:28Z",
       "last_check": {
-        "checked_utc": "2026-11-12T06:14:35.881654+00:00",
-        "source_data_utc": "2026-11-11T21:22:47Z",
+        "checked_utc": "2026-11-16T03:10:53.138453+00:00",
+        "source_data_utc": "2026-11-15T21:22:28Z",
         "changed": [
           "roads_-74_40.sqlite",
-          "roads_-74_41.sqlite",
-          "roads_-75_38.sqlite",
           "roads_-75_39.sqlite",
           "roads_-75_40.sqlite",
           "roads_-75_41.sqlite",
           "roads_-76_39.sqlite",
-          "roads_-76_40.sqlite",
+          "roads_-76_40.sqlite"
+        ],
+        "reused": [
+          "roads_-74_41.sqlite",
+          "roads_-75_38.sqlite",
           "roads_-76_41.sqlite"
         ],
-        "reused": [],
         "removed": [],
-        "full_bytes": 249217919,
-        "upload_bytes": 249217919,
-        "duration_seconds": 131.56,
+        "full_bytes": 249303936,
+        "upload_bytes": 247755648,
+        "duration_seconds": 257.87,
         "no_changes": false,
         "published": true,
-        "version": "2026-11-11-7725b8fe62-f1-20261112061435",
+        "version": "2026-11-15-9b45130dbe-f1-20261116031053",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-12T06:14:35.881654+00:00",
-      "last_published_version": "2026-11-11-7725b8fe62-f1-20261112061435"
+      "last_successful_publication_utc": "2026-11-16T03:10:53.138453+00:00",
+      "last_published_version": "2026-11-15-9b45130dbe-f1-20261116031053"
     },
     "us-nm": {
       "last_attempt_utc": "2026-11-16T02:59:40.324653+00:00",
