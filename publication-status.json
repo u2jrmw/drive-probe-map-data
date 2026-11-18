@@ -2916,38 +2916,39 @@
       "last_published_version": "2026-11-17-1bae5c35eb-f1-20261118044741"
     },
     "us-vt": {
-      "last_attempt_utc": "2026-11-18T04:49:38.408432+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-18T04:50:59.848369+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/44238450168",
-      "last_successful_check_utc": "2026-11-12T07:27:24.919780+00:00",
-      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_successful_check_utc": "2026-11-18T04:50:36.165901+00:00",
+      "source_data_utc": "2026-11-17T21:24:30Z",
       "last_check": {
-        "checked_utc": "2026-11-12T07:27:24.919780+00:00",
-        "source_data_utc": "2026-11-11T21:22:47Z",
+        "checked_utc": "2026-11-18T04:50:36.165901+00:00",
+        "source_data_utc": "2026-11-17T21:24:30Z",
         "changed": [
-          "roads_-72_44.sqlite",
-          "roads_-72_45.sqlite",
           "roads_-73_42.sqlite",
           "roads_-73_43.sqlite",
           "roads_-73_44.sqlite",
           "roads_-73_45.sqlite",
-          "roads_-74_42.sqlite",
           "roads_-74_43.sqlite",
           "roads_-74_44.sqlite",
           "roads_-74_45.sqlite"
         ],
-        "reused": [],
+        "reused": [
+          "roads_-72_44.sqlite",
+          "roads_-72_45.sqlite",
+          "roads_-74_42.sqlite"
+        ],
         "removed": [],
-        "full_bytes": 68887830,
-        "upload_bytes": 68887830,
-        "duration_seconds": 48.17,
+        "full_bytes": 68891926,
+        "upload_bytes": 61834518,
+        "duration_seconds": 76.11,
         "no_changes": false,
         "published": true,
-        "version": "2026-11-11-43057c52ea-f1-20261112072724",
+        "version": "2026-11-17-649c67702d-f1-20261118045036",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-12T07:27:24.919780+00:00",
-      "last_published_version": "2026-11-11-43057c52ea-f1-20261112072724"
+      "last_successful_publication_utc": "2026-11-18T04:50:36.165901+00:00",
+      "last_published_version": "2026-11-17-649c67702d-f1-20261118045036"
     },
     "us-wa": {
       "last_attempt_utc": "2026-11-12T07:34:19.361668+00:00",
