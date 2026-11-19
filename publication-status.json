@@ -227,15 +227,21 @@
       "last_published_version": "2026-11-11-d12e183b21-f1-20261112042948"
     },
     "us-ak": {
-      "last_attempt_utc": "2026-11-19T13:37:24.190838+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-19T13:41:44.229626+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/44535224876",
-      "last_successful_check_utc": "2026-11-12T04:07:12.547763+00:00",
-      "source_data_utc": "2026-11-11T21:22:47Z",
+      "last_successful_check_utc": "2026-11-19T13:40:04.055879+00:00",
+      "source_data_utc": "2026-11-17T21:24:30Z",
       "last_check": {
-        "checked_utc": "2026-11-12T04:07:12.547763+00:00",
-        "source_data_utc": "2026-11-11T21:22:47Z",
-        "changed": [],
+        "checked_utc": "2026-11-19T13:40:04.055879+00:00",
+        "source_data_utc": "2026-11-17T21:24:30Z",
+        "changed": [
+          "roads_-143_67.sqlite",
+          "roads_-148_64.sqlite",
+          "roads_-150_61.sqlite",
+          "roads_-151_60.sqlite",
+          "roads_-165_67.sqlite"
+        ],
         "reused": [
           "roads_-130_55.sqlite",
           "roads_-130_56.sqlite",
@@ -282,7 +288,6 @@
           "roads_-143_64.sqlite",
           "roads_-143_65.sqlite",
           "roads_-143_66.sqlite",
-          "roads_-143_67.sqlite",
           "roads_-143_69.sqlite",
           "roads_-144_61.sqlite",
           "roads_-144_62.sqlite",
@@ -320,7 +325,6 @@
           "roads_-148_61.sqlite",
           "roads_-148_62.sqlite",
           "roads_-148_63.sqlite",
-          "roads_-148_64.sqlite",
           "roads_-148_65.sqlite",
           "roads_-148_66.sqlite",
           "roads_-148_67.sqlite",
@@ -337,7 +341,6 @@
           "roads_-149_70.sqlite",
           "roads_-150_59.sqlite",
           "roads_-150_60.sqlite",
-          "roads_-150_61.sqlite",
           "roads_-150_62.sqlite",
           "roads_-150_63.sqlite",
           "roads_-150_64.sqlite",
@@ -348,7 +351,6 @@
           "roads_-150_69.sqlite",
           "roads_-150_70.sqlite",
           "roads_-151_59.sqlite",
-          "roads_-151_60.sqlite",
           "roads_-151_61.sqlite",
           "roads_-151_62.sqlite",
           "roads_-151_63.sqlite",
@@ -497,7 +499,6 @@
           "roads_-165_62.sqlite",
           "roads_-165_64.sqlite",
           "roads_-165_65.sqlite",
-          "roads_-165_67.sqlite",
           "roads_-166_54.sqlite",
           "roads_-166_59.sqlite",
           "roads_-166_60.sqlite",
@@ -534,16 +535,16 @@
           "roads_174_52.sqlite"
         ],
         "removed": [],
-        "full_bytes": 55960642,
-        "upload_bytes": 0,
-        "duration_seconds": 127.25,
-        "no_changes": true,
-        "published": false,
-        "version": null,
+        "full_bytes": 56026178,
+        "upload_bytes": 20673602,
+        "duration_seconds": 256.5,
+        "no_changes": false,
+        "published": true,
+        "version": "2026-11-17-a5db860364-f1-20261119134004",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-12T03:57:42.180594+00:00",
-      "last_published_version": "2026-11-11-9189108990-f1-20261112035742"
+      "last_successful_publication_utc": "2026-11-19T13:40:04.055879+00:00",
+      "last_published_version": "2026-11-17-a5db860364-f1-20261119134004"
     },
     "us-al": {
       "last_attempt_utc": "2026-11-18T22:17:52.043950+00:00",
