@@ -1339,15 +1339,16 @@
       "last_published_version": "2026-11-27-656697d9a6-f1-20261128170925"
     },
     "us-ma": {
-      "last_attempt_utc": "2026-11-28T17:10:33.888535+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-28T17:14:52.716007+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/46168241440",
-      "last_successful_check_utc": "2026-11-15T03:02:35.241773+00:00",
-      "source_data_utc": "2026-11-13T21:22:20Z",
+      "last_successful_check_utc": "2026-11-28T17:14:07.514165+00:00",
+      "source_data_utc": "2026-11-27T21:21:21Z",
       "last_check": {
-        "checked_utc": "2026-11-15T03:02:35.241773+00:00",
-        "source_data_utc": "2026-11-13T21:22:20Z",
+        "checked_utc": "2026-11-28T17:14:07.514165+00:00",
+        "source_data_utc": "2026-11-27T21:21:21Z",
         "changed": [
+          "roads_-70_41.sqlite",
           "roads_-71_41.sqlite",
           "roads_-71_42.sqlite",
           "roads_-72_41.sqlite",
@@ -1356,20 +1357,19 @@
           "roads_-74_42.sqlite"
         ],
         "reused": [
-          "roads_-70_41.sqlite",
           "roads_-73_41.sqlite"
         ],
         "removed": [],
-        "full_bytes": 285364694,
-        "upload_bytes": 283345366,
-        "duration_seconds": 393.0,
+        "full_bytes": 285610454,
+        "upload_bytes": 285557206,
+        "duration_seconds": 252.95,
         "no_changes": false,
         "published": true,
-        "version": "2026-11-13-ae13cdcb2b-f1-20261115030235",
+        "version": "2026-11-27-238d41eca9-f1-20261128171407",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-15T03:02:35.241773+00:00",
-      "last_published_version": "2026-11-13-ae13cdcb2b-f1-20261115030235"
+      "last_successful_publication_utc": "2026-11-28T17:14:07.514165+00:00",
+      "last_published_version": "2026-11-27-238d41eca9-f1-20261128171407"
     },
     "us-md": {
       "last_attempt_utc": "2026-11-21T19:34:18.296423+00:00",
