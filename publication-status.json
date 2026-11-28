@@ -1127,20 +1127,24 @@
       "last_published_version": "2026-11-27-791b8a1ec4-f1-20261128081539"
     },
     "us-in": {
-      "last_attempt_utc": "2026-11-28T08:17:38.885063+00:00",
-      "last_attempt_outcome": "started",
+      "last_attempt_utc": "2026-11-28T08:23:39.485221+00:00",
+      "last_attempt_outcome": "success",
       "last_run_url": "https://github.com/u2jrmw/drive-probe-map-data/actions/runs/46124517976",
-      "last_successful_check_utc": "2026-11-14T23:17:56.581219+00:00",
-      "source_data_utc": "2026-11-13T21:22:20Z",
+      "last_successful_check_utc": "2026-11-28T08:22:10.397757+00:00",
+      "source_data_utc": "2026-11-27T21:21:21Z",
       "last_check": {
-        "checked_utc": "2026-11-14T23:17:56.581219+00:00",
-        "source_data_utc": "2026-11-13T21:22:20Z",
+        "checked_utc": "2026-11-28T08:22:10.397757+00:00",
+        "source_data_utc": "2026-11-27T21:21:21Z",
         "changed": [
+          "roads_-85_38.sqlite",
+          "roads_-85_39.sqlite",
           "roads_-85_41.sqlite",
           "roads_-86_38.sqlite",
           "roads_-86_39.sqlite",
           "roads_-86_40.sqlite",
           "roads_-86_41.sqlite",
+          "roads_-87_37.sqlite",
+          "roads_-87_38.sqlite",
           "roads_-87_39.sqlite",
           "roads_-87_40.sqlite",
           "roads_-87_41.sqlite",
@@ -1150,26 +1154,22 @@
           "roads_-88_41.sqlite"
         ],
         "reused": [
-          "roads_-85_38.sqlite",
-          "roads_-85_39.sqlite",
           "roads_-85_40.sqlite",
-          "roads_-87_37.sqlite",
-          "roads_-87_38.sqlite",
           "roads_-88_40.sqlite",
           "roads_-89_37.sqlite",
           "roads_-89_38.sqlite"
         ],
         "removed": [],
-        "full_bytes": 359233031,
-        "upload_bytes": 316655111,
-        "duration_seconds": 281.13,
+        "full_bytes": 359667207,
+        "upload_bytes": 349980167,
+        "duration_seconds": 354.53,
         "no_changes": false,
         "published": true,
-        "version": "2026-11-13-6e3e7100aa-f1-20261114231756",
+        "version": "2026-11-27-a5226d0c96-f1-20261128082210",
         "dry_run": false
       },
-      "last_successful_publication_utc": "2026-11-14T23:17:56.581219+00:00",
-      "last_published_version": "2026-11-13-6e3e7100aa-f1-20261114231756"
+      "last_successful_publication_utc": "2026-11-28T08:22:10.397757+00:00",
+      "last_published_version": "2026-11-27-a5226d0c96-f1-20261128082210"
     },
     "us-ks": {
       "last_attempt_utc": "2026-11-21T02:42:14.185104+00:00",
